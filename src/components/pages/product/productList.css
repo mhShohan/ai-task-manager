@@ -1,0 +1,26 @@
+.productList {
+    flex: 4;
+    padding: 20px;
+    background: rgba(151, 167, 170, 0.6);
+}
+
+.productsListUsername {
+    display: flex;
+    align-items: center;
+}
+.productsListIconAvatar {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+.iconContainer {
+    display: flex;
+    align-items: center;
+}
+.iconContainer a {
+    padding-top: 17px;
+}
+.ULicon {
+    margin-right: 10px;
+    cursor: pointer;
+}
