@@ -2,4 +2,4 @@
 
 ### React, Recharts, Styled-components
 
-#Live View: https://focused-jang-aa2f32.netlify.app/
+#Live View: https://admin-dashboard2321.netlify.app
