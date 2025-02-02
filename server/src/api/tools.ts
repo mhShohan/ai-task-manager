@@ -20,7 +20,8 @@ const taskTools = {
           },
           description: {
             type: 'string',
-            description: 'Details description of the task',
+            description:
+              'Details description of the task. If description is not provide then try to generate description',
           },
         },
         required: ['title', 'description', 'status'],
@@ -33,7 +34,7 @@ const taskTools = {
     type: 'function',
     function: {
       name: 'get_all_tasks',
-      description: 'Retrieve all tasks from mongoDB with optional filtering',
+      description: 'Retrieve all tasks from mongoDB with optional filtering and sorting',
       parameters: {
         type: 'object',
         properties: {
@@ -45,6 +46,16 @@ const taskTools = {
           title: {
             type: 'string',
             description: 'Filter tasks by title (partial match)',
+          },
+          sortBy: {
+            type: 'string',
+            enum: ['createdAt', 'index', 'status'],
+            description: 'Sort all tasks',
+          },
+          sortOrder: {
+            type: 'string',
+            enum: ['ascending', 'descending'],
+            description: 'Sort tasks ascending or descending',
           },
         },
         required: [],
@@ -80,9 +91,9 @@ const taskTools = {
       parameters: {
         type: 'object',
         properties: {
-          id: {
+          index: {
             type: 'string',
-            description: 'MongoDB ObjectId of the task to update',
+            description: 'index of the task to update',
           },
           title: {
             type: 'string',
@@ -108,16 +119,24 @@ const taskTools = {
     type: 'function',
     function: {
       name: 'delete_task',
-      description: 'Delete a task from mongoDB',
+      description: 'Delete task from mongoDB',
       parameters: {
         type: 'object',
         properties: {
-          id: {
+          _id: {
             type: 'string',
             description: 'MongoDB ObjectId of the task to delete',
           },
+          index: {
+            type: 'number',
+            description: 'index of the task to delete',
+          },
+          status: {
+            type: 'string',
+            description: 'status of the task to delete',
+          },
         },
-        required: ['id'],
+        required: [],
       },
     },
   }),

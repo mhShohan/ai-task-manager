@@ -6,13 +6,10 @@ async function handleToolCalls(toolCall) {
 
   let data;
 
-  console.log('--------------toolCall----------------------');
-  console.log(toolCall);
-  console.log('--------------toolCall----------------------');
-
   switch (functionName) {
     case 'create_task':
-      data = await taskServices.create(args);
+      await taskServices.create(args);
+      data = await taskServices.getAll();
       break;
     case 'get_all_tasks':
       data = await taskServices.getAll(args);
@@ -21,10 +18,12 @@ async function handleToolCalls(toolCall) {
       data = await taskServices.getSingle(args.id);
       break;
     case 'update_task':
-      data = await taskServices.update(args.id, args);
+      await taskServices.update(args.index, args);
+      data = await taskServices.getAll();
       break;
     case 'delete_task':
-      data = await taskServices.delete(args.id);
+      await taskServices.delete(args);
+      data = await taskServices.getAll();
       break;
     default:
       data = [];

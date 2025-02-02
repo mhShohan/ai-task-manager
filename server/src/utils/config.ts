@@ -9,4 +9,5 @@ export default {
   database_url: process.env.DATABASE_URL,
   openApiKey: process.env.OPENAI_API_KEY,
   assistantId: process.env.ASSISTANT_ID,
+  assistantBaseUrl: process.env.ASSISTANT_BASE_URL,
 };

@@ -1,12 +1,12 @@
-import asyncHandler from "@/lib/asyncHandler";
-import sendResponse from "@/lib/sendResponse";
-import taskServices from "@/services/task.services";
-import httpStatus from "http-status";
+import asyncHandler from '@/lib/asyncHandler';
+import sendResponse from '@/lib/sendResponse';
+import taskServices from '@/services/task.services';
+import httpStatus from 'http-status';
 
 class TaskController {
-  private httpStatus = httpStatus
+  private httpStatus = httpStatus;
   private services = taskServices;
-  private messageTitle = "Task";
+  private messageTitle = 'Task';
 
   // Create
   create = asyncHandler(async (req, res) => {
@@ -58,7 +58,7 @@ class TaskController {
 
   // Get single tasks
   delete = asyncHandler(async (req, res) => {
-    const result = await this.services.delete(req.params.id);
+    const result = await this.services.delete({ _id: req.params.id });
 
     sendResponse(res, {
       success: true,
@@ -69,5 +69,5 @@ class TaskController {
   });
 }
 
-const taskController = new TaskController()
-export default taskController
+const taskController = new TaskController();
+export default taskController;

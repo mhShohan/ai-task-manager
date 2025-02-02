@@ -16,9 +16,10 @@ class TaskServices {
       queryParams.status = query.status;
     }
 
-    console.log(queryParams);
+    const sortBy: string = query.sortBy ? (query.sortBy as string) : 'index';
+    const sortOrder = query.sortOrder === 'ascending' ? -1 : 1;
 
-    const tasks = await Task.find(queryParams);
+    const tasks = await Task.find(queryParams).sort({ [sortBy]: sortOrder });
     return tasks;
   }
 
@@ -29,22 +30,41 @@ class TaskServices {
   }
 
   async create(payload: ITask) {
+    const lastTask = await Task.findOne().sort({ index: -1 });
+    payload.index = lastTask ? lastTask.index + 1 : 1;
+
     const task = new Task(payload);
     await task.save();
     return task;
   }
 
   async update(id: string, payload: Partial<ITask & { id: string }>) {
-    delete payload.id;
+    delete payload.index;
 
-    const task = await Task.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
+    const task = await Task.findOneAndUpdate({ index: id }, payload, {
+      new: true,
+      runValidators: true,
+    });
     if (!task) throw new Error('Task not found');
     return task;
   }
 
-  async delete(id: string) {
-    const task = await Task.findByIdAndDelete(id);
-    if (!task) throw new Error('Task not found');
+  async delete(queryParams: Record<string, unknown>) {
+    const query: Record<string, unknown> = {};
+
+    if (queryParams.index) {
+      query.index = queryParams.index;
+    }
+
+    if (queryParams._id) {
+      query._id = queryParams._id;
+    }
+
+    if (queryParams.status) {
+      query.status = queryParams.status;
+    }
+
+    const task = await Task.deleteMany(query);
     return task;
   }
 }
