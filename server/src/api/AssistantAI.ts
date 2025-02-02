@@ -42,20 +42,3 @@ class AssistantAI {
 
 const assistantAI = new AssistantAI();
 export default assistantAI;
-
-// async function chatWithDeepSeek() {
-//   try {
-//     const response = await openai.chat.completions.create({
-//       model: "qwen2.5:0.5b",
-//       messages: [
-//         { role: "system", content: "You are an AI that strictly responds in valid JSON format." },
-//         { role: "user", content: "Generate a JavaScript function to reverse a string and return in JSON format." }
-//       ],
-//       temperature: 0.7,
-//     });
-
-//     console.log(response.choices[0].message);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// }
