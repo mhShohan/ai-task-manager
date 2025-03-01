@@ -28,10 +28,10 @@ Assistant AI is an AI-powered task management system that interacts with a Mongo
     cd ai-task-manager
    ```
 
-2. **Install dependencies and run client** - add environment variables as line `default.env`
+2. **Install dependencies and run server** - add `.env` file (to and environment variables) at root of the `/server` directory as following `default.env`
 
    ```sh
-     cd client
+     cd server
 
      npm install
      #or
@@ -40,7 +40,7 @@ Assistant AI is an AI-powered task management system that interacts with a Mongo
      npm run dev
    ```
 
-3. **Install dependencies and run client** - add environment variables as line `default.env`
+3. **Install dependencies and run client** - add `.env` file (to and environment variables) at root of the `/client` directory as following `default.env`
 
    ```sh
      cd client
